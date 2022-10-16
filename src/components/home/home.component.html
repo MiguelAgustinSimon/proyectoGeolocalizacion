@@ -1,0 +1,17 @@
+<div class="container-fluid">
+
+    <div class="card mt-3">
+        <h2 class="card-header text-center">JSON</h2>
+        <div class="card-body text-center fondoCard">
+          <h5 class="card-title letraBlanca">Seleccione el archivo Json a validar</h5>
+          <p class="card-text letraBlanca">Una vez esté validado correctamente, visualizarás el contenido.</p>
+          
+          <div *ngIf="archivoCargado; else elseBlock"> <!--https://angular.io/api/common/NgIf-->
+            <button class="btn btn-success" type="button" (click)="validar()">Validar</button>
+          </div>
+          <ng-template #elseBlock>
+            <button class="btn btn-primary" type="button" (click)="subirArchivo()">Subir archivo</button>
+          </ng-template>
+        </div>
+      </div>`
+</div>
