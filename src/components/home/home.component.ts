@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   }
    
   subirArchivo(){
-    alert("subirArchivo");
+    alert("subirArchivoTest");
     this.archivoCargado=true;
   }
   
