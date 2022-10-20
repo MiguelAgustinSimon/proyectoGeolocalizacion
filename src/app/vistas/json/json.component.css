@@ -1,0 +1,8 @@
+.fondoCard{
+    background-image: url('../../../assets/img/geo.png');
+    background-size: cover;
+}
+
+.letraBlanca{
+    color:white;
+}

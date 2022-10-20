@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from 'src/app/services/rest.service';
 
-
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-json',
+  templateUrl: './json.component.html',
+  styleUrls: ['./json.component.css']
 })
-export class HomeComponent implements OnInit {
+export class JsonComponent implements OnInit {
 
   private fileTmp:any;
   valorArchivo:string="";
@@ -18,12 +17,8 @@ export class HomeComponent implements OnInit {
 
   constructor(public restService:RestService) { }
 
-
-
   ngOnInit(): void {
   }
-
-  
 
   validar(){
     try {
@@ -74,12 +69,7 @@ export class HomeComponent implements OnInit {
         this.archivoValidado=false;
        }else{
         this.archivoCargado=true;
-        console.log(archivo);
-
-        // this.restService.getJson(`https://pokeapi.co/api/v2/pokemon/ditto`).subscribe((res:any)=>{
-        //   console.log(res);
-        // });
-       this.readThis(archivo);
+        this.readThis(archivo);
        }
     }
   }
@@ -91,9 +81,11 @@ export class HomeComponent implements OnInit {
     myReader.onloadend = function(e){
       // you can perform an action with readed data here
       console.log(myReader.result);
+      //https://www.youtube.com/watch?v=9Pc8LGN4uug&ab_channel=productioncoder
     }
 
     myReader.readAsText(file);
   }
 
-}//fin clase
+  
+}
