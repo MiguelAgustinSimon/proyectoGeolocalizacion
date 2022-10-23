@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from 'src/app/services/rest.service';
+import { SweetAlertService } from 'src/app/services/sweet-alert.service';
+import { JsonService } from '../../services/json.service';
 
 @Component({
   selector: 'app-json',
@@ -9,32 +11,18 @@ import { RestService } from 'src/app/services/rest.service';
 export class JsonComponent implements OnInit {
 
   private fileTmp:any;
+  private myFile:any;
   valorArchivo:string="";
   archivoCargado:boolean=false;
   archivoValidado:boolean=true;
 
   personajes:any;
 
-  constructor(public restService:RestService) { }
+  constructor(public restService:RestService, public JsonService:JsonService, public sweetAlertServ:SweetAlertService) { }
 
   ngOnInit(): void {
   }
 
-  validar(){
-    try {
-      //let objeto = JSON.parse(textoJSON);
-      console.log('Sintaxis Correcta');
-    }
-    catch (error) {
-        if(error instanceof SyntaxError) {
-            let mensaje = error.message;
-            console.log('ERROR EN LA SINTAXIS:', mensaje);
-        } else {
-            throw error; // si es otro error, que lo siga lanzando
-        }
-    }
-  }
-   
   getFile($event:any):void{
     //https://www.youtube.com/watch?v=diJE8esd_V4&ab_channel=LeiferMendez
     const [file]=$event.target.files;
@@ -46,12 +34,6 @@ export class JsonComponent implements OnInit {
     
   }
 
-  sendFile(){
-    const body=new FormData;
-    body.append('myFile',this.fileTmp.fileRaw, this.fileTmp.fileName)
-    this.restService.sendPost(body)
-    .subscribe(res=>console.log(res))
-  }
 
   comprueba_extension(archivo:any) {
     var allowedExtensions = /(.json|.geojson)$/i;
@@ -83,9 +65,18 @@ export class JsonComponent implements OnInit {
       console.log(myReader.result);
       //https://www.youtube.com/watch?v=9Pc8LGN4uug&ab_channel=productioncoder
     }
-
     myReader.readAsText(file);
+    this.myFile=file;
   }
+
+  async validarJsonSchema(){
+    var valido = await this.JsonService.validarJsonSchema(this.myFile);
+    if(valido){
+      this.sweetAlertServ.alertSuccess('Json Válido!');
+    }else{
+      this.sweetAlertServ.alertSuccess('Error');
+    }
+}
 
   
 }

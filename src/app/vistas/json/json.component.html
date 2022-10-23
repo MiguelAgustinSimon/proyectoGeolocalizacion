@@ -7,7 +7,7 @@
           <p class="card-text letraBlanca">Una vez esté validado correctamente, visualizarás el contenido.</p>
           
           <div *ngIf="archivoCargado; else elseBlock"> <!--https://angular.io/api/common/NgIf-->
-            <button class="btn btn-success" type="button" (click)="sendFile()">Validar</button>
+            <button class="btn btn-success" type="button" (click)="validarJsonSchema()">Validar</button>
           </div>
           <ng-template #elseBlock>
             <input class="btn btn-primary" type="file" (change)="getFile($event)">
