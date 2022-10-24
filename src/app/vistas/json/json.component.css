@@ -1,8 +1,16 @@
 .fondoCard{
-    background-image: url('../../../assets/img/geo.png');
+    background-image: url('../../../assets/img/geo2.png');
+   
     background-size: cover;
+    background-position: center;
 }
 
+.fondoCard2{
+    background-image: url('../../../assets/img/geo.png');
+   
+    background-size: cover;
+    background-position: center;
+}
 .letraBlanca{
     color:white;
 }

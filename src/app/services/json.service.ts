@@ -24,6 +24,7 @@ export class JsonService {
   validarJsonSchema(json:Json){
     return new Promise( resolve => {
       this.http.post(this.global.url+'/validarJsonSchema',json).subscribe( async resp => {
+        console.log(resp);
         if( resp=='OK' ) {
           resolve(true);
         }else{

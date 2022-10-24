@@ -108,5 +108,8 @@
       }
     }
   },
-  "defaultProject": "proyectogeolocalizacion"
+  "defaultProject": "proyectogeolocalizacion",
+  "cli": {
+    "analytics": "20465a32-3322-462b-8f8b-6ca8a295d4bb"
+  }
 }
