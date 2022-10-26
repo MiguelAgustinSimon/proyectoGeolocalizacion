@@ -3,12 +3,12 @@
 }
 
 
-.violeta {
-    background-color: #9478A4;
+.rosa {
+    background-color: #ED729F;
     /* SHP
     #9DA6D7
 
-    XLSs
+    XLS
     #95CAA3
 
     CSV
@@ -21,8 +21,8 @@
     #S9A40 */
 }
 
-.fondoCard{
-    background-image: url('../../../assets/img/geotest.png');
+.fondoCsv{
+    background-image: url('../../../assets/img/csvtest.png');
     background-size: cover;
     background-position: center;
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { GlobalService } from './global.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Json } from '../interfaces/json';
+import { SweetAlertService } from './sweet-alert.service';
 
 
 @Injectable({
@@ -9,7 +10,7 @@ import { Json } from '../interfaces/json';
 })
 export class JsonService {
 
-  constructor(private global:GlobalService,private http:HttpClient) { }
+  constructor(private global:GlobalService,private http:HttpClient,private sweetAlertService:SweetAlertService) { }
 
   // getClientes(){
   //   var token = this.auth.obtenerToken()
@@ -22,17 +23,25 @@ export class JsonService {
   // }
 
   validarJsonSchema(json:Json){
-    return new Promise( resolve => {
-      this.http.post(this.global.url+'/validarJsonSchema',json).subscribe( async resp => {
-        console.log(resp);
-        if( resp=='OK' ) {
-          resolve(true);
-        }else{
-          resolve(false); 
-        }
-      }
-      );  
-    })
+      return new Promise( resolve => {
+        this.http.post(this.global.url+'/validarJsonSchema',json).subscribe( async resp => {
+          console.log(`RESPUESTA: ${resp}`);
+          if( resp=='OK' ) {
+            resolve(true);
+          }else{
+            resolve(false); 
+          }
+        }, 
+        error => {
+          var errorObtenido=error.error[0].message;
+          this.sweetAlertService.alertError(errorObtenido);
+          resolve(false);
+        },
+        );  
+      })
+    
   }
+
+
 
 }

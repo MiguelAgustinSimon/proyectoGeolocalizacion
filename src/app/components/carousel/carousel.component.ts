@@ -72,16 +72,16 @@ export class CarouselComponent implements OnInit {
           this.router.navigate(['/json']);
           break;
       case 1:
-          alert("proximamente");
+        this.router.navigate(['/csv']);
           break;
       case 2:
-        alert("proximamente");
+        this.router.navigate(['/xml']);
           break;
       case 3:
-        alert("proximamente");
+        this.router.navigate(['/xls']);
         break;
       case 4:
-        alert("proximamente");
+        this.router.navigate(['/shp']);
         break;
       default: 
           // 

@@ -4,11 +4,11 @@ import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { JsonService } from '../../services/json.service';
 
 @Component({
-  selector: 'app-json',
-  templateUrl: './json.component.html',
-  styleUrls: ['./json.component.css']
+  selector: 'app-xml',
+  templateUrl: './xml.component.html',
+  styleUrls: ['./xml.component.css']
 })
-export class JsonComponent implements OnInit {
+export class XmlComponent implements OnInit {
 
   private fileTmp:any;
   private myFile:any;
@@ -73,5 +73,5 @@ export class JsonComponent implements OnInit {
     }
 }
 
-  
+
 }

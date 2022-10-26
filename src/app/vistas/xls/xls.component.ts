@@ -2,13 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { RestService } from 'src/app/services/rest.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { JsonService } from '../../services/json.service';
-
 @Component({
-  selector: 'app-json',
-  templateUrl: './json.component.html',
-  styleUrls: ['./json.component.css']
+  selector: 'app-xls',
+  templateUrl: './xls.component.html',
+  styleUrls: ['./xls.component.css']
 })
-export class JsonComponent implements OnInit {
+export class XlsComponent implements OnInit {
 
   private fileTmp:any;
   private myFile:any;
@@ -73,5 +72,5 @@ export class JsonComponent implements OnInit {
     }
 }
 
-  
+
 }

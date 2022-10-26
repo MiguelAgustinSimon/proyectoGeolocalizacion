@@ -10,6 +10,10 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { JsonComponent } from './vistas/json/json.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
+import { CsvComponent } from './vistas/csv/csv.component';
+import { XmlComponent } from './vistas/xml/xml.component';
+import { XlsComponent } from './vistas/xls/xls.component';
+import { ShpComponent } from './vistas/shp/shp.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +22,11 @@ import { CarouselComponent } from './components/carousel/carousel.component';
     HomeComponent,
     AcercaComponent,
     JsonComponent,
-    CarouselComponent
+    CarouselComponent,
+    CsvComponent,
+    XmlComponent,
+    XlsComponent,
+    ShpComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +36,10 @@ import { CarouselComponent } from './components/carousel/carousel.component';
       {path:'', component:HomeComponent},
       {path:'acerca', component:AcercaComponent},
       {path:'json', component:JsonComponent},
+      {path:'csv', component:CsvComponent},
+      {path:'xml', component:XmlComponent},
+      {path:'xls', component:XlsComponent},
+      {path:'shp', component:ShpComponent},
       {path:'**', redirectTo:'/', pathMatch:'full'}
     ])
   ],

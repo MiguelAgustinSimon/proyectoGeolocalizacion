@@ -18,9 +18,10 @@ export class SweetAlertService {
 
   alertError(mensaje:string) {
     swal.fire({
-      title: mensaje,
-      text: '',
-      icon: 'error'
+      icon: 'error',
+      title: 'Ha ocurrido un error',
+      text: mensaje,
+      
     });
   }
 
