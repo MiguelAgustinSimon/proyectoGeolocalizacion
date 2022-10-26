@@ -1,27 +1,27 @@
 <div class="container-fluid">
-    <div class="card mt-3">
-      <h2 class="card-header text-center">XLS</h2>
-      <div class="card-body">
-      <div class="row">
-        <div class="col-md-4 fondoCard"></div>
-        <div class="col-md-1"><!--vacio--></div>
-        <div class="col-md-7">
-          <div class="card-body">
-            <h5 class="card-title">Seleccione el archivo XLS a validar</h5>
-            <p class="card-text">Una vez esté validado correctamente, visualizarás el contenido.</p>
-            
-            <div *ngIf="archivoCargado; else elseBlock"> <!--https://angular.io/api/common/NgIf-->
-              <button class="btn btn-success" type="button" (click)="validarJsonSchema()">Validar</button>
-            </div>
-            <ng-template #elseBlock>
-              <input class="btn verde" type="file" (change)="getFile($event)">
-              <div *ngIf="!archivoValidado"class="alert alert-danger" role="alert">
-                <i class="fa-solid fa-triangle-exclamation"></i> {{valorArchivo}}
-              </div>
-            </ng-template>
+  <div class="card mt-3">
+    <h2 class="card-header text-center">XLS</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <img src="../../../assets/img/xlstest.png" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-1"><!--vacio--></div>
+      <div class="col-md-7">
+        <div class="card-body">
+          <h5 class="card-title">Seleccione el archivo Xls a validar</h5>
+          <p class="card-text">Una vez esté validado correctamente, visualizarás el contenido.</p>
+          
+          <div *ngIf="archivoCargado; else elseBlock"> <!--https://angular.io/api/common/NgIf-->
+            <button class="btn btn-success" type="button" (click)="validarJsonSchema()">Validar</button>
           </div>
+          <ng-template #elseBlock>
+            <input class="btn verde" type="file" (change)="getFile($event)">
+            <div *ngIf="!archivoValidado"class="alert alert-danger" role="alert">
+              <i class="fa-solid fa-triangle-exclamation"></i> {{valorArchivo}}
+            </div>
+          </ng-template>
         </div>
       </div>
     </div>
-  </div>
+</div>
 </div>
