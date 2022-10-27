@@ -59,7 +59,7 @@ export class JsonComponent implements OnInit {
     var myReader:FileReader = new FileReader();
 
     myReader.onloadend = function(e){
-      //console.log(myReader.result);
+      console.log(myReader.result);
       //https://www.youtube.com/watch?v=9Pc8LGN4uug&ab_channel=productioncoder
     }
     myReader.readAsText(file);
