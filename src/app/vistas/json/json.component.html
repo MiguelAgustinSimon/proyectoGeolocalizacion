@@ -1,4 +1,5 @@
 <div class="container-fluid">
+  <div class="row">
       <div class="card mt-3">
         <h2 class="card-header text-center">JSON / GEOJSON</h2>
         <div class="row">
@@ -16,7 +17,7 @@
               </div>
               <ng-template #elseBlock>
                 <input class="btn violeta" type="file" (change)="getFile($event)">
-                <div *ngIf="!archivoValidado"class="alert alert-danger" role="alert">
+                <div *ngIf="!archivoValidadoExt"class="alert alert-danger" role="alert">
                   <i class="fa-solid fa-triangle-exclamation"></i> {{valorArchivo}}
                 </div>
               </ng-template>
@@ -24,4 +25,9 @@
           </div>
         </div>
     </div>
+  </div>
 </div>
+
+
+
+

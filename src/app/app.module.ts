@@ -14,6 +14,7 @@ import { CsvComponent } from './vistas/csv/csv.component';
 import { XmlComponent } from './vistas/xml/xml.component';
 import { XlsComponent } from './vistas/xls/xls.component';
 import { ShpComponent } from './vistas/shp/shp.component';
+import { MapboxComponent } from './components/mapbox/mapbox.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ShpComponent } from './vistas/shp/shp.component';
     CsvComponent,
     XmlComponent,
     XlsComponent,
-    ShpComponent
+    ShpComponent,
+    MapboxComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +42,7 @@ import { ShpComponent } from './vistas/shp/shp.component';
       {path:'xml', component:XmlComponent},
       {path:'xls', component:XlsComponent},
       {path:'shp', component:ShpComponent},
+      {path:'mapbox', component:MapboxComponent},
       {path:'**', redirectTo:'/', pathMatch:'full'}
     ])
   ],

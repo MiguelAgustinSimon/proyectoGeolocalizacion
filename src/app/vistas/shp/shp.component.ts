@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { RestService } from 'src/app/services/rest.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { JsonService } from '../../services/json.service';
+import {Router} from '@angular/router';
+import {Json} from '../../interfaces/json';
+import { DataService } from 'src/app/services/data.service';
 
 
 @Component({
@@ -17,7 +19,7 @@ export class ShpComponent implements OnInit {
   archivoCargado:boolean=false;
   archivoValidado:boolean=true;
 
-  constructor(public restService:RestService, public JsonService:JsonService, public sweetAlertServ:SweetAlertService) { }
+  constructor(public JsonService:JsonService, public sweetAlertServ:SweetAlertService) { }
 
   ngOnInit(): void {
   }
