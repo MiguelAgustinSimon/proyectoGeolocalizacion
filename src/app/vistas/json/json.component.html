@@ -12,7 +12,7 @@
               <h5 class="card-title">Seleccione el archivo Json a validar</h5>
               <p class="card-text">Una vez esté validado correctamente, visualizarás el contenido.</p>
               
-              <div *ngIf="archivoCargado; else elseBlock"> <!--https://angular.io/api/common/NgIf-->
+              <div *ngIf="archivoCargado; else elseBlock"> <!--https://angular.io/api/common/NgIf -->
                 <button class="btn btn-success" type="button" (click)="validarJsonSchema()">Validar</button>
               </div>
               <ng-template #elseBlock>
