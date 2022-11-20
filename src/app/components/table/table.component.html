@@ -1,0 +1,36 @@
+<div class="container-fluid mt-2">
+    <div class="row">
+        <div class="col-md-4"><!--vacio--></div>
+        <div class="col-md-4">
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="buscar aqui..." aria-label="Search">
+              </form>
+        </div>
+        <div class="col-md-4"><!--vacio--></div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table mt-2">
+                <thead class="table-dark">
+                  <tr>
+                    <th>Modelo</th>
+                    <th>Nombre</th>
+                    <th>Estado</th>
+                    <th>Fecha</th>
+                    <th>Observaciones</th>
+                  </tr>
+                </thead>
+                <tbody *ngIf="bitacora">
+                    <tr *ngFor="let unaBitacora of bitacora" (click)="redirigirBitacoraEspecifica(unaBitacora.id)">
+                        <!-- <td class="text-center">{{unaBitacora.modelo}}</td>
+                        <td class="text-center">{{unaBitacora.nombre}}</td>
+                        <td class="text-center">{{unaBitacora.estado}}</td>
+                        <td class="text-center">{{unaBitacora.createdAt}}</td>
+                        <td class="text-center">{{unaBitacora.observacion}}</td> -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

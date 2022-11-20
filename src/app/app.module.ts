@@ -15,6 +15,9 @@ import { XmlComponent } from './vistas/xml/xml.component';
 import { XlsComponent } from './vistas/xls/xls.component';
 import { ShpComponent } from './vistas/shp/shp.component';
 import { MapboxComponent } from './components/mapbox/mapbox.component';
+import { TableComponent } from './components/table/table.component';
+import { BitacoraComponent } from './vistas/bitacora/bitacora.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { MapboxComponent } from './components/mapbox/mapbox.component';
     XmlComponent,
     XlsComponent,
     ShpComponent,
-    MapboxComponent
+    MapboxComponent,
+    TableComponent,
+    BitacoraComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
@@ -43,6 +49,7 @@ import { MapboxComponent } from './components/mapbox/mapbox.component';
       {path:'xls', component:XlsComponent},
       {path:'shp', component:ShpComponent},
       {path:'mapbox', component:MapboxComponent},
+      {path:'bitacora', component:BitacoraComponent},
       {path:'**', redirectTo:'/', pathMatch:'full'}
     ])
   ],
