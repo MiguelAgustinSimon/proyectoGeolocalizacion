@@ -22,9 +22,9 @@ export class JsonService {
   //   return this.http.get<Cliente>(this.global.url+'/clientes/datos',{headers});
   // }
 
-  validarJsonSchema(json:Json){
+  validarJsonSchema(nombreArchivo:string,json:Json){
       return new Promise( resolve => {
-        this.http.post(this.global.url+'/validarJsonSchema',json).subscribe( async resp => {
+        this.http.post(`${this.global.url}/validarJsonSchema/${nombreArchivo}`,json).subscribe( async resp => {
           console.log(`RESPUESTA: ${resp}`);
           if( resp=='OK' ) {
             resolve(true);

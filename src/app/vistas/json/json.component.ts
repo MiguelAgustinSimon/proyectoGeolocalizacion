@@ -90,7 +90,7 @@ export class JsonComponent implements OnInit {
   }
 
   async validarJsonSchema(){
-    var valido = await this.JsonService.validarJsonSchema(this.myFile);
+    var valido = await this.JsonService.validarJsonSchema(this.myFile.name,this.myFile);
     if(valido){
       this.sweetAlertServ.alertSuccess('Json Válido!');
 

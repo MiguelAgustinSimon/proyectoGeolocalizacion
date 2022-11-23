@@ -18,6 +18,7 @@ import { MapboxComponent } from './components/mapbox/mapbox.component';
 import { TableComponent } from './components/table/table.component';
 import { BitacoraComponent } from './vistas/bitacora/bitacora.component';
 import { FilterPipe } from './pipes/filter.pipe';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { FilterPipe } from './pipes/filter.pipe';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     HttpClientModule,
     RouterModule.forRoot([

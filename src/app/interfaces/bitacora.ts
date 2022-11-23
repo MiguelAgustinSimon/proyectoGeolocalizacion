@@ -1,5 +1,9 @@
+import { Categoria } from './categoria';
+
 export interface Bitacora {
-    id?:string;
+    _id?:string;
+    nombreArchivo?:string;
+    categorias?:Categoria[];
     modelo?:string;
     nombre?:string;
     estado?:boolean;

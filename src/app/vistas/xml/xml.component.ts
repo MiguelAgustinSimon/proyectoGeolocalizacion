@@ -69,10 +69,10 @@ export class XmlComponent implements OnInit {
   }
 
   async validarJsonSchema(){
-    var valido = await this.JsonService.validarJsonSchema(this.myFile);
-    if(valido){
-      this.sweetAlertServ.alertSuccess('Json Válido!');
-    }
+    // var valido = await this.JsonService.validarJsonSchema(this.myFile);
+    // if(valido){
+    //   this.sweetAlertServ.alertSuccess('Json Válido!');
+    // }
 }
 
 
