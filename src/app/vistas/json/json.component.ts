@@ -12,12 +12,11 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class JsonComponent implements OnInit {
 //https://www.youtube.com/watch?v=9Pc8LGN4uug&ab_channel=productioncoder
-  private fileTmp:any;
   private myFile:any;
+  private nombreArchivo:string;
   valorArchivo:string="";
   archivoCargado:boolean=false;
   archivoValidadoExt:boolean=true;
-  fileString:any;
   arrJsonCoords:Json[] = [];
   coords:Json={
     id:0,
@@ -34,10 +33,8 @@ export class JsonComponent implements OnInit {
   getFile($event:any):void{
     //https://www.youtube.com/watch?v=diJE8esd_V4&ab_channel=LeiferMendez
     const [file]=$event.target.files;
-    this.fileTmp={
-      fileRaw:file,
-      fileName:file.name
-    }
+    //console.log(file.name);  
+    this.nombreArchivo=file.name;
     this.comprueba_extension(file);
     
   }
@@ -52,7 +49,6 @@ export class JsonComponent implements OnInit {
     }else{
        //recupero la extensión de este nombre de archivo
        var archivoRuta=archivo.name;
-       var extension=archivoRuta.split('.').pop();
 
        if(!allowedExtensions.exec(archivoRuta)){
         this.valorArchivo="Debes seleccionar un archivo JSON / GEOJSON";
@@ -72,25 +68,40 @@ export class JsonComponent implements OnInit {
       //console.log(myReader.result);
        //var lines = (<string>myReader.result).split('\n');
        
-       let miJson=JSON.parse(<string>myReader.result); //parseo el json a un objeto TS
+      let miJson=JSON.parse(<string>myReader.result); //parseo el json a un objeto TS
+    
+      for(let pos in miJson){
+        if(pos=="geometry"){
+          for(let position in miJson.geometry.coordinates){
+            //lleno mi array al recorrer el Json
+            this.coords=miJson.geometry.coordinates[position];
+            this.coords.latitud=miJson.geometry.coordinates[position][0];
+            this.coords.longitud=miJson.geometry.coordinates[position][1];
+            this.arrJsonCoords.push(this.coords);
+          }
+          //console.log(this.arrJsonCoords);
+        }
 
-       for(let pos in miJson.geometry.coordinates){
-        //leno un objeto json con el objeto TS y lo paso a un array
-        this.coords=miJson.geometry.coordinates[pos];
-        this.coords.latitud=miJson.geometry.coordinates[pos][0];
-        this.coords.longitud=miJson.geometry.coordinates[pos][1];
-        this.arrJsonCoords.push(this.coords);
-       }
-       this.fileString = myReader.result;
+        if(pos=="features"){
+          for(let position in miJson.features){
+            this.coords=miJson.features[position].geometry.coordinates;
+            this.coords.latitud=miJson.features[position].geometry.coordinates[0];
+            this.coords.longitud=miJson.features[position].geometry.coordinates[1];
+            this.arrJsonCoords.push(this.coords);
+          }
+          //console.log(this.arrJsonCoords);
 
+        }
+      }
+    
+      this.myFile=myReader.result; //te muestra todo el json en texto plano
+      
     }
     myReader.readAsText(file);
-    this.myFile=file;
- 
   }
 
   async validarJsonSchema(){
-    var valido = await this.JsonService.validarJsonSchema(this.myFile.name,this.myFile);
+    var valido = await this.JsonService.validarJsonSchema(this.nombreArchivo,this.myFile);
     if(valido){
       this.sweetAlertServ.alertSuccess('Json Válido!');
 
