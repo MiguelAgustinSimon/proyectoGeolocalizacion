@@ -37,7 +37,7 @@ export class MapboxComponent implements OnInit {
       // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
       style: 'mapbox://styles/mapbox/streets-v11', // style URL
       center: [this.longitudInicial,this.latitudInicial], // starting position [lng, lat]
-      zoom: 10, // starting zoom
+      zoom: 5, // starting zoom
     });
 
     this.dataService.arrCoordenadas.forEach(val=> {

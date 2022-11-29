@@ -85,8 +85,15 @@ export class JsonComponent implements OnInit {
         if(pos=="features"){
           for(let position in miJson.features){
             this.coords=miJson.features[position].geometry.coordinates;
-            this.coords.latitud=miJson.features[position].geometry.coordinates[0];
-            this.coords.longitud=miJson.features[position].geometry.coordinates[1];
+
+            //pregunto por si geometry.coordinates tiene doble array: ejemplo "coordinates":[[-58.35325384158226,-34.65116216792222]]
+            if(miJson.features[position].geometry.coordinates[1]==undefined){
+              this.coords.latitud=miJson.features[position].geometry.coordinates[0][1];
+              this.coords.longitud=miJson.features[position].geometry.coordinates[0][0];
+            }else{
+              this.coords.latitud=miJson.features[position].geometry.coordinates[0];
+              this.coords.longitud=miJson.features[position].geometry.coordinates[1];
+            }
             this.arrJsonCoords.push(this.coords);
           }
           //console.log(this.arrJsonCoords);
