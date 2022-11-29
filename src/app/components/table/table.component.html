@@ -29,11 +29,26 @@
                         <td class="text-center">{{unaBitacora.nombre}}</td>
                         <td *ngIf="unaBitacora.estado" class="text-center"><i class="fa-solid fa-check"></i></td>
                         <td *ngIf="!unaBitacora.estado" class="text-center"><i class="fa-solid fa-xmark"></i></td>
-                        <td class="text-center">{{unaBitacora.createdAt | date: 'dd/MM/yyyy'}}</td>
+                        <td class="text-center">{{unaBitacora.createdAt | date: 'dd/MM/yyyy hh:mm:ss' }}hs</td>
                         <td class="text-center">{{unaBitacora.observacion}}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
+    </div>
+    <div class="row">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" (click)="cambiarPaginaAnterior()">
+                    <a class="page-link"  tabindex="-1">Anterior</a>
+                </li>
+                <li class="page-item" (click)="cambiarPagina(1)"><a class="page-link">1</a></li>
+                <li class="page-item" (click)="cambiarPagina(2)"><a class="page-link">2</a></li>
+                <li class="page-item" (click)="cambiarPagina(3)"><a class="page-link">3</a></li>
+                <li class="page-item" (click)="cambiarPaginaSiguiente()">
+                    <a class="page-link" >Siguiente</a>
+                </li>
+            </ul>
+          </nav>
     </div>
 </div>
