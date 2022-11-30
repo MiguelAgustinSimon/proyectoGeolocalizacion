@@ -16,7 +16,6 @@ export class BitacoraService {
       return this.http.get<Bitacora[]>(this.global.url+'/getBitacora');
   }
   getBitacoraPaginada(page:number){
-    console.log("llego");
     return this.http.get<Bitacora[]>(`${this.global.url}/getBitacora?page=${page}`);
 }
 }

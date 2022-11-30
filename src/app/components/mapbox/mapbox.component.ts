@@ -1,12 +1,13 @@
 import { Component, OnInit, Input} from '@angular/core';
 import { environment } from 'src/environments/environment';
 import * as Mapboxgl from 'mapbox-gl';
+import {Popup,Marker} from 'mapbox-gl';
 import { DataService } from 'src/app/services/data.service';
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import { Json } from 'src/app/interfaces/json';
 import { Router } from '@angular/router';
 
-
+//Mapas FernandoHerrera: https://www.youtube.com/watch?v=rjzsRvq0URo&list=PLCKuOXG0bPi0RHirEQB7GJgpfW-Q5m-Xu&index=2&ab_channel=FernandoHerrera
 @Component({
   selector: 'app-mapbox',
   templateUrl: './mapbox.component.html',
@@ -17,7 +18,7 @@ export class MapboxComponent implements OnInit {
    mapa:Mapboxgl.Map;
    latitudInicial=0;
    longitudInicial=0;
-   //@Input() dataEntrante:any;
+
   constructor(public dataService:DataService,private router: Router) {
    
     if(this.dataService.arrCoordenadas.length === 0){
@@ -27,7 +28,7 @@ export class MapboxComponent implements OnInit {
   }
 
   ngOnInit() {
-    //console.log(this.dataService.arrCoordenadas);
+    console.log(this.dataService);
     this.latitudInicial=this.obtenerPromedioLatitud(this.dataService.arrCoordenadas);
     this.longitudInicial=this.obtenerPromedioLongitud(this.dataService.arrCoordenadas);
 
@@ -41,25 +42,51 @@ export class MapboxComponent implements OnInit {
     });
 
     this.dataService.arrCoordenadas.forEach(val=> {
-      this.crearMarcador(val.longitud,val.latitud);
+      this.crearMarcador(val.longitud,val.latitud,val.infoLugar);
     });
 
     this.mapa.addControl(new Mapboxgl.NavigationControl());
     this.mapa.addControl(new Mapboxgl.FullscreenControl());
   }
 
-  crearMarcador(lng:number, lat:number){
+  crearMarcador(lng:number, lat:number,infoLugar?:any){
+    let miTablaHtml="";
+    for (var key in infoLugar) {
+      // console.log(key);
+      // console.log(infoLugar[key]);
+      miTablaHtml+=
+      `<table style="width:100%"> 
+        <tr>
+          <th>${key}</th>
+        </tr>
+        <tr>
+          <td>${infoLugar[key]}</td>
+        </tr>
+      </table>`;
+
+    }
 
     // Create a default Marker and add it to the map.
     const marker = new Mapboxgl.Marker({
-      draggable:true
+      draggable:false
     })
     .setLngLat([lng,lat])
+    .setPopup(
+      new Mapboxgl.Popup({ offset: 25 }) // add popups
+        .setHTML(
+          // `<h3>${infoLugar.tramo}</h3><p>${infoLugar.ID_Ruta}</p>`
+          miTablaHtml
+        )
+    )
     .addTo(this.mapa);
 
     marker.on('drag',()=>{
       console.log(marker.getLngLat());
     })
+    // marker.getElement().addEventListener('click', () => {
+    //   console.log(marker.getLngLat());
+    
+    // });
     
   }
 
@@ -79,5 +106,6 @@ export class MapboxComponent implements OnInit {
     }
     return (acumuladorLng/arrJson.length);
   }
+
 
 }

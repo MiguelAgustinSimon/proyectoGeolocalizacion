@@ -24,14 +24,13 @@ export class TableComponent implements OnInit {
   traerBitacora=async()=>{
     await this.bitacoraService.getBitacora().subscribe( resp => {
       this.bitacora=resp;
-      console.log(this.bitacora);
+      //console.log(this.bitacora);
       this.buscador = '';
     })
   }
   traerBitacoraPaginada=async(page:number)=>{
     await this.bitacoraService.getBitacoraPaginada(page).subscribe( resp => {
       this.bitacora=resp;
-      console.log(this.bitacora);
       this.buscador = '';
     })
   }

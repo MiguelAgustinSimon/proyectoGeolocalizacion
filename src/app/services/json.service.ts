@@ -38,9 +38,11 @@ export class JsonService {
               resolve(false); 
             }
           },
-          error:error=>{
-            var errorObtenido=error.error[0].message;
-            this.sweetAlertService.alertError(errorObtenido);
+          error:async error=>{
+            if(error.status=400){
+              var errorObtenido="El documento no cumple con la estructura requerida para la validación.";
+            }
+            await this.sweetAlertService.alertError(errorObtenido);
             resolve(false);
           }
          }) 

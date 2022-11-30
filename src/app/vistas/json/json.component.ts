@@ -4,6 +4,7 @@ import { JsonService } from '../../services/json.service';
 import {Router} from '@angular/router';
 import {Json} from '../../interfaces/json';
 import { DataService } from 'src/app/services/data.service';
+import { Lugarinfo } from 'src/app/interfaces/lugarinfo';
 
 @Component({
   selector: 'app-json',
@@ -18,11 +19,23 @@ export class JsonComponent implements OnInit {
   archivoCargado:boolean=false;
   archivoValidadoExt:boolean=true;
   arrJsonCoords:Json[] = [];
+
   coords:Json={
     id:0,
     latitud:0,
     longitud:0
   };
+  
+  unlugar:Lugarinfo={
+    id:0,
+    anio:0,
+    tipo:"",
+    latitud:0,
+    longitud:0,
+    provincia:"",
+    localidad:"",
+    tramo:""
+  }
 
   constructor(private router: Router, public JsonService:JsonService, 
     public sweetAlertServ:SweetAlertService, private dataService:DataService) { }
@@ -94,15 +107,17 @@ export class JsonComponent implements OnInit {
               this.coords.latitud=miJson.features[position].geometry.coordinates[0];
               this.coords.longitud=miJson.features[position].geometry.coordinates[1];
             }
+            
+            //Aca voy a llenar la info de cada punto para al hacer click mostrar en mapa
+            if(miJson.features[position].properties!=null){
+              this.unlugar=miJson.features[position].properties;
+              this.coords.infoLugar=this.unlugar;
+            }
             this.arrJsonCoords.push(this.coords);
-          }
-          //console.log(this.arrJsonCoords);
-
+          } //fin for
         }
       }
-    
       this.myFile=myReader.result; //te muestra todo el json en texto plano
-      
     }
     myReader.readAsText(file);
   }
@@ -115,6 +130,8 @@ export class JsonComponent implements OnInit {
       //le paso a dataService los datos para que lo consuma MAPBOX..
       this.dataService.arrCoordenadas=this.arrJsonCoords;
       this.renderizarMapa();
+    }else{
+      this.archivoCargado=false;
     }
 }
 

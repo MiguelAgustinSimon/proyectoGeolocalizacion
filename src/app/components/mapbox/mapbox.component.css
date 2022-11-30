@@ -6,3 +6,16 @@
    left: 10px;
    z-index: 1;  */
 }
+
+.mapboxgl-popup {
+    max-width: 200px;
+}
+  
+.mapboxgl-popup-content {
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+}
+
+table, th, td {
+    border:1px solid black;
+}

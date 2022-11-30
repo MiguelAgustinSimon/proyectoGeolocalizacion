@@ -16,7 +16,7 @@ export class SweetAlertService {
     });
   }
 
-  alertError(mensaje:string) {
+  alertError=async(mensaje:string)=>{
     swal.fire({
       icon: 'error',
       title: 'Ha ocurrido un error',
