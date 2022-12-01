@@ -108,6 +108,7 @@ export class JsonComponent implements OnInit {
               this.coords.longitud=miJson.features[position].geometry.coordinates[0];
             }
             
+            
             //Aca voy a llenar la info de cada punto para al hacer click mostrar en mapa
             if(miJson.features[position].properties!=null){
               this.unlugar=miJson.features[position].properties;
