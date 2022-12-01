@@ -54,16 +54,16 @@ export class MapboxComponent implements OnInit {
     for (var key in infoLugar) {
       // console.log(key);
       // console.log(infoLugar[key]);
-      miTablaHtml+=
-      `<table style="width:100%"> 
-        <tr>
-          <th>${key}</th>
-        </tr>
-        <tr>
-          <td>${infoLugar[key]}</td>
-        </tr>
-      </table>`;
-
+      // miTablaHtml+=
+      // `<table class="default"> 
+      //   <tr>
+      //     <th>${key}</th>
+      //   </tr>
+      //   <tr>
+      //     <td>${infoLugar[key]}</td>
+      //   </tr>
+      // </table>`;
+      miTablaHtml+=`<b>${key}: ${infoLugar[key]}</b><br><hr>`;
     }
 
     // Create a default Marker and add it to the map.
@@ -74,7 +74,7 @@ export class MapboxComponent implements OnInit {
     .setPopup(
       new Mapboxgl.Popup({ offset: 25 }) // add popups
         .setHTML(
-          // `<h3>${infoLugar.tramo}</h3><p>${infoLugar.ID_Ruta}</p>`
+           //`<h3>${infoLugar.tramo}</h3><p>${infoLugar.ID_Ruta}</p>`
           miTablaHtml
         )
     )

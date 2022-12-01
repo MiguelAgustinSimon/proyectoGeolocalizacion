@@ -104,8 +104,8 @@ export class JsonComponent implements OnInit {
               this.coords.latitud=miJson.features[position].geometry.coordinates[0][1];
               this.coords.longitud=miJson.features[position].geometry.coordinates[0][0];
             }else{
-              this.coords.latitud=miJson.features[position].geometry.coordinates[0];
-              this.coords.longitud=miJson.features[position].geometry.coordinates[1];
+              this.coords.latitud=miJson.features[position].geometry.coordinates[1];
+              this.coords.longitud=miJson.features[position].geometry.coordinates[0];
             }
             
             //Aca voy a llenar la info de cada punto para al hacer click mostrar en mapa
