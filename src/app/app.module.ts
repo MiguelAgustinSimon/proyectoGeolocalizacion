@@ -19,6 +19,7 @@ import { TableComponent } from './components/table/table.component';
 import { BitacoraComponent } from './vistas/bitacora/bitacora.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { FormsModule } from '@angular/forms';
+import { MapboxmultilineComponent } from './components/mapboxmultiline/mapboxmultiline.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { FormsModule } from '@angular/forms';
     MapboxComponent,
     TableComponent,
     BitacoraComponent,
-    FilterPipe
+    FilterPipe,
+    MapboxmultilineComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +53,7 @@ import { FormsModule } from '@angular/forms';
       {path:'xls', component:XlsComponent},
       {path:'shp', component:ShpComponent},
       {path:'mapbox', component:MapboxComponent},
+      {path:'mapboxmultiline', component:MapboxmultilineComponent},
       {path:'bitacora', component:BitacoraComponent},
       {path:'**', redirectTo:'/', pathMatch:'full'}
     ])

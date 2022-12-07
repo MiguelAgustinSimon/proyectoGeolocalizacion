@@ -6,6 +6,7 @@ import {Json} from '../../interfaces/json';
 import { DataService } from 'src/app/services/data.service';
 import { Lugarinfo } from 'src/app/interfaces/lugarinfo';
 
+//va a servir para rutas: https://docs.mapbox.com/mapbox-gl-js/example/geojson-line/
 @Component({
   selector: 'app-json',
   templateUrl: './json.component.html',
@@ -41,6 +42,7 @@ export class JsonComponent implements OnInit {
     public sweetAlertServ:SweetAlertService, private dataService:DataService) { }
 
   ngOnInit(): void {
+    this.dataService.multiline=null;
   }
 
   getFile($event:any):void{
@@ -80,11 +82,18 @@ export class JsonComponent implements OnInit {
     myReader.onloadend = (e) => {
       //console.log(myReader.result);
        //var lines = (<string>myReader.result).split('\n');
+      this.myFile=myReader.result; //te muestra todo el json en texto plano
        
       let miJson=JSON.parse(<string>myReader.result); //parseo el json a un objeto TS
-    
-      for(let pos in miJson){
-        if(pos=="geometry"){
+      this.setearLatLong(this.myFile,miJson);//le paso el archivoPlano y el objetoTS
+    }
+    myReader.readAsText(file);
+  }
+
+  setearLatLong=async(archivoPlano:any, miJson:any)=>{
+    for(let pos in miJson){
+      if(pos=="geometry"){
+        if(miJson.geometry.type=='Point' || miJson.geometry.type=='MultiPoint'){
           for(let position in miJson.geometry.coordinates){
             //lleno mi array al recorrer el Json
             this.coords=miJson.geometry.coordinates[position];
@@ -92,45 +101,56 @@ export class JsonComponent implements OnInit {
             this.coords.longitud=miJson.geometry.coordinates[position][1];
             this.arrJsonCoords.push(this.coords);
           }
-          //console.log(this.arrJsonCoords);
         }
-
-        if(pos=="features"){
-          for(let position in miJson.features){
-            this.coords=miJson.features[position].geometry.coordinates;
-
-            //pregunto por si geometry.coordinates tiene doble array: ejemplo "coordinates":[[-58.35325384158226,-34.65116216792222]]
-            if(miJson.features[position].geometry.coordinates[1]==undefined){
-              this.coords.latitud=miJson.features[position].geometry.coordinates[0][1];
-              this.coords.longitud=miJson.features[position].geometry.coordinates[0][0];
-            }else{
-              this.coords.latitud=miJson.features[position].geometry.coordinates[1];
-              this.coords.longitud=miJson.features[position].geometry.coordinates[0];
-            }
-            
-            
-            //Aca voy a llenar la info de cada punto para al hacer click mostrar en mapa
-            if(miJson.features[position].properties!=null){
-              this.unlugar=miJson.features[position].properties;
-              this.coords.infoLugar=this.unlugar;
-            }
-            this.arrJsonCoords.push(this.coords);
-          } //fin for
-        }
+        //console.log(this.arrJsonCoords);
       }
-      this.myFile=myReader.result; //te muestra todo el json en texto plano
+
+      if(pos=="features"){
+            for(let position in miJson.features){
+              if(miJson.features[position].geometry.type=='Point' || miJson.features[position].geometry.type=='MultiPoint'){
+                this.coords=miJson.features[position].geometry.coordinates;
+              
+                //pregunto por si geometry.coordinates tiene doble array: ejemplo "coordinates":[[-58.35325384158226,-34.65116216792222]]
+                if(miJson.features[position].geometry.coordinates[1]==undefined){
+                  this.coords.latitud=miJson.features[position].geometry.coordinates[0][1];
+                  this.coords.longitud=miJson.features[position].geometry.coordinates[0][0];
+                }else{
+                  this.coords.latitud=miJson.features[position].geometry.coordinates[1];
+                  this.coords.longitud=miJson.features[position].geometry.coordinates[0];
+                }
+
+                //Aca voy a llenar la info de cada punto para al hacer click mostrar en mapa
+                if(miJson.features[position].properties!=null){
+                  this.unlugar=miJson.features[position].properties;
+                  this.coords.infoLugar=this.unlugar;
+                }
+                this.arrJsonCoords.push(this.coords);
+              }else{
+                console.log(`ES!!! ${miJson.features[position].geometry.type}`);
+                this.dataService.multiline=archivoPlano;
+              }
+            } //fin for
+          
+       
+      }
     }
-    myReader.readAsText(file);
   }
+
 
   async validarJsonSchema(){
     var valido = await this.JsonService.validarJsonSchema(this.nombreArchivo,this.myFile);
     if(valido){
       this.sweetAlertServ.alertSuccess('Json Válido!');
-
-      //le paso a dataService los datos para que lo consuma MAPBOX..
-      this.dataService.arrCoordenadas=this.arrJsonCoords;
-      this.renderizarMapa();
+      if(this.dataService.multiline==null) //son todos tipo Point, mostrara en mapa los markers
+      {
+        //le paso a dataService los datos para que lo consuma MAPBOX..
+        this.dataService.arrCoordenadas=this.arrJsonCoords;
+        this.renderizarMapa();
+      }else{
+        //son multiline, mostrara en mapa muchas lineas, no markers
+        this.renderizarMapaMultiline();
+      }
+      
     }else{
       this.archivoCargado=false;
     }
@@ -138,6 +158,10 @@ export class JsonComponent implements OnInit {
 
 renderizarMapa(){
   this.router.navigate(['/mapbox']);
+}
+
+renderizarMapaMultiline(){
+  this.router.navigate(['/mapboxmultiline']);
 }
 
   
