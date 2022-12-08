@@ -20,6 +20,7 @@ import { BitacoraComponent } from './vistas/bitacora/bitacora.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { FormsModule } from '@angular/forms';
 import { MapboxmultilineComponent } from './components/mapboxmultiline/mapboxmultiline.component';
+import { MapboxpolygonComponent } from './components/mapboxpolygon/mapboxpolygon.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { MapboxmultilineComponent } from './components/mapboxmultiline/mapboxmul
     TableComponent,
     BitacoraComponent,
     FilterPipe,
-    MapboxmultilineComponent
+    MapboxmultilineComponent,
+    MapboxpolygonComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +56,7 @@ import { MapboxmultilineComponent } from './components/mapboxmultiline/mapboxmul
       {path:'shp', component:ShpComponent},
       {path:'mapbox', component:MapboxComponent},
       {path:'mapboxmultiline', component:MapboxmultilineComponent},
+      {path:'mapboxpolygon', component:MapboxpolygonComponent},
       {path:'bitacora', component:BitacoraComponent},
       {path:'**', redirectTo:'/', pathMatch:'full'}
     ])

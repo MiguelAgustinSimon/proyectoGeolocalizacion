@@ -127,6 +127,7 @@ export class JsonComponent implements OnInit {
                 this.arrJsonCoords.push(this.coords);
               }else{
                 console.log(`ES!!! ${miJson.features[position].geometry.type}`);
+                this.dataService.tipo=miJson.features[position].geometry.type;
                 this.dataService.multiline=archivoPlano;
               }
             } //fin for
@@ -147,8 +148,16 @@ export class JsonComponent implements OnInit {
         this.dataService.arrCoordenadas=this.arrJsonCoords;
         this.renderizarMapa();
       }else{
-        //son multiline, mostrara en mapa muchas lineas, no markers
-        this.renderizarMapaMultiline();
+        if(this.dataService.tipo=='LineString' || this.dataService.tipo=='MultiLineString')
+        {
+          //son multiline, mostrara en mapa muchas lineas(como rutas), no markers
+          this.renderizarMapaMultiline();
+        }
+        else{
+          //son poligonos
+          this.renderizarMapaPolygon();
+        }
+       
       }
       
     }else{
@@ -162,6 +171,9 @@ renderizarMapa(){
 
 renderizarMapaMultiline(){
   this.router.navigate(['/mapboxmultiline']);
+}
+renderizarMapaPolygon(){
+  this.router.navigate(['/mapboxpolygon']);
 }
 
   

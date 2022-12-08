@@ -8,5 +8,6 @@ export class DataService {
   //https://www.youtube.com/watch?v=df0eH9mM9nU&ab_channel=FernandoHerrera
   arrCoordenadas:Json[] = [];
   multiline:string;
+  tipo:string;
   constructor() { }
 }
