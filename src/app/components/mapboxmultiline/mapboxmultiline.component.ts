@@ -43,7 +43,7 @@ export class MapboxmultilineComponent implements OnInit {
  ngOnInit() {
   this.mapa = new Mapboxgl.Map({
     accessToken: environment.mapboxKey,
-    container: 'mapa', // container ID
+    container: 'mapa', //container ID
     // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
     style: 'mapbox://styles/mapbox/streets-v11', // style URL
     center: [-58.52493,-34.783997], // starting position [lng, lat]
