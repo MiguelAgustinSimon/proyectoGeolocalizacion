@@ -19,6 +19,7 @@ export class JsonComponent implements OnInit {
   valorArchivo:string="";
   archivoCargado:boolean=false;
   archivoValidadoExt:boolean=true;
+  archivoValidando:boolean=false;
   arrJsonCoords:Json[] = [];
 
   coords:Json={
@@ -137,8 +138,8 @@ export class JsonComponent implements OnInit {
     }
   }
 
-
   async validarJsonSchema(){
+    this.archivoValidando=true;
     var valido = await this.JsonService.validarJsonSchema(this.nombreArchivo,this.myFile);
     if(valido){
       this.sweetAlertServ.alertSuccess('Json Válido!');
@@ -161,6 +162,7 @@ export class JsonComponent implements OnInit {
       }
       
     }else{
+      this.archivoValidando=false;
       this.archivoCargado=false;
     }
 }

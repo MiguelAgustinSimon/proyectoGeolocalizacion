@@ -130,7 +130,7 @@ export class MapboxpolygonComponent implements OnInit {
     // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
     style: 'mapbox://styles/mapbox/light-v11', // style URL
     center: [-58.83350090114561, -34.48127677071819], // starting position
-    zoom: 15, // starting zoom
+    zoom: 9, // starting zoom
   });
   
   this.mapa.on('load', () => {
