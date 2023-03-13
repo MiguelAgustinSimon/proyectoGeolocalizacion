@@ -160,7 +160,6 @@ export class JsonComponent implements OnInit {
         }
        
       }
-      
     }else{
       this.archivoValidando=false;
       this.archivoCargado=false;
